@@ -1,0 +1,22 @@
+{
+  "name": "@nanndaxyz/bots",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "notify::ndt::price": "npx jiti src/notifyNDTPrice.ts"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "@slack/web-api": "^6.7.2",
+    "@uniswap/sdk-core": "^3.0.1",
+    "@uniswap/v3-core": "^1.0.1",
+    "@uniswap/v3-sdk": "^3.9.0",
+    "ethers": "^5.7.0",
+    "jiti": "^1.14.0",
+    "ts-node": "^10.9.1",
+    "typescript": "^4.8.2"
+  }
+}

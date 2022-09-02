@@ -1,0 +1,28 @@
+name: bots
+
+on:
+  workflow_dispatch:
+  schedule:
+    # 10分おきに実行する
+    - cron: '0/5 * * * *'
+
+jobs:
+  run:
+    name: notify::ndt::price
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - uses: actions/setup-node@v2
+        with:
+          node-version: 14.19.0
+      - name: Upgrade npm
+        run: npm i -g npm@8.3.1
+      - name: Install Dependencies
+        run: npm ci
+      - name: Run
+        run: npm run notify::ndt::price
+        env:
+          MAINNET_RPC: ${{secrets.MAINNET_RPC}}
+          SLACK_TOKEN: ${{secrets.SLACK_TOKEN}}
+          UPPER_THRESHOLD_PRICE: ${{secrets.UPPER_THRESHOLD_PRICE}}
+          LOWER_THRESHOLD_PRICE: ${{secrets.LOWER_THRESHOLD_PRICE}}
