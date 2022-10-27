@@ -67,10 +67,10 @@ export const alert = async (
           emoji: true,
         },
       },
-      {
-        type: "section",
-        fields: mentions(),
-      },
+      // {
+      //   type: "section",
+      //   fields: mentions(),
+      // },
       {
         type: "section",
         fields: [
