@@ -56,7 +56,7 @@ export const alert = async (
   const uniswapUrl = `https://app.uniswap.org/#/swap?exactField=input&exactAmount=1&inputCurrency=${AppConfig.ndtAddress}&outputCurrency=eth`;
 
   const args = {
-    channel: AppConfig.slackChannel,
+    channel: AppConfig.channelNames.price,
     text: "NDT Price",
     blocks: [
       {

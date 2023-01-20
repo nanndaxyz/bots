@@ -7,7 +7,9 @@ dotenv.config();
 export const AppConfig = {
   provider: new ethers.providers.JsonRpcProvider(process.env.MAINNET_RPC),
   slackToken: process.env.SLACK_TOKEN || "",
-  slackChannel: "#200_ndt-eth_bots",
+  channelNames: {
+    price: "#200_ndt-eth_bots",
+  },
   upperThresholdPrice: Number(process.env.UPPER_THRESHOLD_PRICE),
   lowerThresholdPrice: Number(process.env.LOWER_THRESHOLD_PRICE),
   uniswapV3FactoryAddress: "0x1F98431c8aD98523631AE4a59f267346ea31F984",
