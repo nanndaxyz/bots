@@ -1,10 +1,10 @@
-name: bots
+name: price-bots
 
 on:
   workflow_dispatch:
   schedule:
     # 10分おきに実行する
-    - cron: '0/5 * * * *'
+    - cron: "0/5 * * * *"
 
 jobs:
   run:
