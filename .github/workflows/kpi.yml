@@ -1,4 +1,4 @@
-name: bots
+name: kpi-bots
 
 on:
   workflow_dispatch:
