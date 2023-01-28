@@ -4,7 +4,8 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "notify::ndt::price": "npx jiti src/notifyNDTPrice.ts"
+    "notify::ndt::price": "npx jiti src/notifyNDTPrice.ts",
+    "notify::kpi": "npx jiti src/notifyKpi.ts"
   },
   "keywords": [],
   "author": "",
