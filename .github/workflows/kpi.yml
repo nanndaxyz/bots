@@ -3,8 +3,8 @@ name: kpi-bots
 on:
   workflow_dispatch:
   schedule:
-    # UTCで毎日9時と21時に実行
-    - cron: "0 0,5,12 * * *"
+    # JSTで毎日9時と21時に実行(UTCで0時と12時)
+    - cron: "0 0,12 * * *"
 
 jobs:
   run:
