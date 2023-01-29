@@ -1,6 +1,7 @@
 # bots
 
-[![contracts](https://github.com/nanndaxyz/bots/actions/workflows/bots.yml/badge.svg)](https://github.com/nanndaxyz/bots/actions/workflows/bots.yml)
+[![contracts](https://github.com/nanndaxyz/bots/actions/workflows/price.yml/badge.svg)](https://github.com/nanndaxyz/bots/actions/workflows/price.yml)
+[![contracts](https://github.com/nanndaxyz/bots/actions/workflows/kpi.yml/badge.svg)](https://github.com/nanndaxyz/bots/actions/workflows/kpi.yml)
 
 ## install
 
