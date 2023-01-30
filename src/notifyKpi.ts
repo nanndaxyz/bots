@@ -6,10 +6,19 @@ import { sendMessage } from "./libs/slack";
 import { getQuestView } from "./libs/quest-view/types";
 import { culcRewards } from "./libs/quest-view/aggregation";
 
-export const notify = async (rewards: ReturnType<typeof culcRewards>) => {
+import { getDarkness } from "./libs/darkness/types";
+import { culcLevelAvg } from "./libs/darkness/aggregation";
+
+export const notify = async ({
+  rewards,
+  lvAvg,
+}: {
+  rewards: ReturnType<typeof culcRewards>;
+  lvAvg: number;
+}) => {
   const args = {
     channel: AppConfig.channelNames.kpi,
-    text: "Unclaimed Quest Rewards",
+    text: "KPI",
     blocks: [
       {
         type: "header",
@@ -35,6 +44,23 @@ export const notify = async (rewards: ReturnType<typeof culcRewards>) => {
           },
         ],
       },
+      {
+        type: "header",
+        text: {
+          type: "plain_text",
+          text: `Darkness Lv Avg`,
+          emoji: true,
+        },
+      },
+      {
+        type: "section",
+        fields: [
+          {
+            type: "mrkdwn",
+            text: `${lvAvg} Lv.`,
+          },
+        ],
+      },
     ],
   };
 
@@ -43,7 +69,11 @@ export const notify = async (rewards: ReturnType<typeof culcRewards>) => {
 
 const main = async () => {
   const questView = await getQuestView();
-  await notify(culcRewards(await questView.getDpositDatas()));
+  const darkness = await getDarkness();
+  await notify({
+    rewards: culcRewards(await questView.getDpositDatas()),
+    lvAvg: await culcLevelAvg(darkness),
+  });
 };
 
 main().catch((e) => {
