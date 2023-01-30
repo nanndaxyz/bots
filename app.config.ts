@@ -23,6 +23,7 @@ export const AppConfig = {
     { address: "0x431922f3960076c8f7Ad52023544612fDA5442Bd", name: "coast" },
     { address: "0x33bF21D42C5d1A0B86E6490E3DeCd43082D45D18", name: "volcano" },
   ],
+  darknessAddress: "0x91D1Da2e8E4FA5EB6dC8e60Ed2a81a652c6B7acb",
   liquidityProvisionStartBlocknumber: 15456415,
   mentionIds: [
     "U03PG5ZLYUS", // k.t
