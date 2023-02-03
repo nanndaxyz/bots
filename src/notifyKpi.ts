@@ -26,9 +26,7 @@ export const notify = async ({
   batchBalance: BigNumber;
 }) => {
   const args = {
-    // TODO
-    // channel: AppConfig.channelNames.kpi,
-    channel: "U048M8HCUQG",
+    channel: AppConfig.channelNames.kpi,
     text: "KPI",
     blocks: [
       {
