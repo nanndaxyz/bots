@@ -1,4 +1,4 @@
-import { utils } from "ethers";
+import { BigNumber, utils } from "ethers";
 
 import { AppConfig } from "../app.config";
 import { sendMessage } from "./libs/slack";
@@ -16,13 +16,17 @@ export const notify = async ({
   rewards,
   lvAvg,
   prophetClassCount,
+  darknessCount,
 }: {
   rewards: ReturnType<typeof culcRewards>;
   lvAvg: number;
   prophetClassCount: { className: string; number: number }[];
+  darknessCount: BigNumber;
 }) => {
   const args = {
-    channel: AppConfig.channelNames.kpi,
+    // TODO
+    // channel: AppConfig.channelNames.kpi,
+    channel: "U048M8HCUQG",
     text: "KPI",
     blocks: [
       {
@@ -81,6 +85,23 @@ export const notify = async ({
           text: `${className}:  ${number}`,
         })),
       },
+      {
+        type: "header",
+        text: {
+          type: "plain_text",
+          text: `Darkness Count`,
+          emoji: true,
+        },
+      },
+      {
+        type: "section",
+        fields: [
+          {
+            type: "mrkdwn",
+            text: `${darknessCount}`,
+          },
+        ],
+      },
     ],
   };
 
@@ -94,11 +115,13 @@ const main = async () => {
   const prophet = await getProphet();
 
   const prophetClassCount = await getCounts(prophet);
+  const darknessCount = await darkness.totalSupply();
 
   await notify({
     rewards: culcRewards(await questView.getDpositDatas()),
     lvAvg: await culcLevelAvg(darkness),
     prophetClassCount,
+    darknessCount,
   });
 };
 
