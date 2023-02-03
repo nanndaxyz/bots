@@ -25,6 +25,7 @@ export const AppConfig = {
   ],
   darknessAddress: "0x91D1Da2e8E4FA5EB6dC8e60Ed2a81a652c6B7acb",
   prophetAddress: "0xe05706f76ecc85b4Ab1bA5D37f1299d65b2C437D",
+  batchAddress: "0xb7773b0552242ccb16d567d9febc2aab757f0aba",
   liquidityProvisionStartBlocknumber: 15456415,
   mentionIds: [
     "U03PG5ZLYUS", // k.t

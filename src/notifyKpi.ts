@@ -17,11 +17,13 @@ export const notify = async ({
   lvAvg,
   prophetClassCount,
   darknessCount,
+  batchBalance,
 }: {
   rewards: ReturnType<typeof culcRewards>;
   lvAvg: number;
   prophetClassCount: { className: string; number: number }[];
   darknessCount: BigNumber;
+  batchBalance: BigNumber;
 }) => {
   const args = {
     // TODO
@@ -102,6 +104,23 @@ export const notify = async ({
           },
         ],
       },
+      {
+        type: "header",
+        text: {
+          type: "plain_text",
+          text: `Batch ETH`,
+          emoji: true,
+        },
+      },
+      {
+        type: "section",
+        fields: [
+          {
+            type: "mrkdwn",
+            text: `${utils.formatEther(batchBalance)} ETH`,
+          },
+        ],
+      },
     ],
   };
 
@@ -116,12 +135,16 @@ const main = async () => {
 
   const prophetClassCount = await getCounts(prophet);
   const darknessCount = await darkness.totalSupply();
+  const batchBalance = await AppConfig.provider.getBalance(
+    AppConfig.batchAddress
+  );
 
   await notify({
     rewards: culcRewards(await questView.getDpositDatas()),
     lvAvg: await culcLevelAvg(darkness),
     prophetClassCount,
     darknessCount,
+    batchBalance,
   });
 };
 
