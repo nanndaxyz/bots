@@ -1,6 +1,7 @@
 import { AppConfig } from "../app.config";
 import { getPool } from "./libs/uniswap";
 import { sendMessage } from "./libs/slack";
+import axios from "axios";
 
 const main = async () => {
   const [latestPrice, dayAgoPrice] = await Promise.all([
@@ -10,11 +11,18 @@ const main = async () => {
 
   const diffRatio = ((latestPrice - dayAgoPrice) / dayAgoPrice) * 100;
 
+  const yenEth = await axios
+    .get("https://min-api.cryptocompare.com/data/price?fsym=ETH&tsyms=JPY")
+    .then((response) => response.data.JPY as number);
+
+  const latestPriceYen = latestPrice * yenEth;
+
   console.log(`latest     : 1NDT = ${latestPrice}WETH`);
+  console.log(`latest yen : 1NDT = ￥${latestPriceYen}`);
   console.log(`a day ago  : 1NDT = ${dayAgoPrice}WETH`);
   console.log(`diff ratio : ${diffRatio}%`);
 
-  await alert(latestPrice, dayAgoPrice, diffRatio);
+  await alert(latestPrice, latestPriceYen, dayAgoPrice, diffRatio);
 };
 
 const ndtPrice = async (blocknumberDiff: number) => {
@@ -45,6 +53,7 @@ const ndtPrice = async (blocknumberDiff: number) => {
 
 export const alert = async (
   latestPrice: number,
+  latestPriceYen: number,
   dayAgoPrice: number,
   diffRatio: number
 ) => {
@@ -72,6 +81,10 @@ export const alert = async (
           {
             type: "mrkdwn",
             text: `*latest:*\n${latestPrice.toString()}WETH`,
+          },
+          {
+            type: "mrkdwn",
+            text: `*latest yen:*\n￥${latestPriceYen.toString()}`,
           },
           {
             type: "mrkdwn",
