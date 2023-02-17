@@ -14,12 +14,7 @@ const main = async () => {
   console.log(`a day ago  : 1NDT = ${dayAgoPrice}WETH`);
   console.log(`diff ratio : ${diffRatio}%`);
 
-  if (
-    latestPrice < AppConfig.lowerThresholdPrice ||
-    AppConfig.upperThresholdPrice < latestPrice
-  ) {
-    await alert(latestPrice, dayAgoPrice, diffRatio);
-  }
+  await alert(latestPrice, dayAgoPrice, diffRatio);
 };
 
 const ndtPrice = async (blocknumberDiff: number) => {
